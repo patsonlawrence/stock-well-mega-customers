@@ -1,5 +1,5 @@
 {
-  "name": "My Supermarket App",
+  "name": "Standard Supermarket App",
   "short_name": "Mega",
   "start_url": "https://stock-well-jg1g.vercel.app/",
   "display": "standalone",
