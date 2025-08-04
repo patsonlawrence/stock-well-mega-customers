@@ -3,48 +3,22 @@
 import Head from 'next/head';
 import { useRouter } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
-import { Html5QrcodeScanner } from 'html5-qrcode';
-
+import { Html5Qrcode } from 'html5-qrcode';
 
 export default function Dashboard() {
   const router = useRouter();
 
   const user = {
     phone: '0709123456',
-    name: 'Jane mwijukuruza wa rutinampora Doe',
+    name: 'Mukasa Peter',
     points: 12000,
   };
 
-  const [showScanner, setShowScanner] = useState(false);
-  const [scannedResult, setScannedResult] = useState('');
-  const scannerRef = useRef<HTMLDivElement>(null);
-  
   useEffect(() => {
     if (!user) {
       router.push('/login');
     }
   }, []);
-
-  useEffect(() => {
-    if (showScanner && scannerRef.current) {
-      const scanner = new Html5QrcodeScanner(
-  'qr-reader',
-  { fps: 10, qrbox: 250 },
-  false // verbose mode off
-);
-
-      scanner.render(
-        (decodedText) => {
-          setScannedResult(decodedText);
-          setShowScanner(false);
-          scanner.clear();
-        },
-        (err) => {
-          console.warn('QR Scan error:', err);
-        }
-      );
-    }
-  }, [showScanner]);
 
   return (
     <>
@@ -83,29 +57,80 @@ export default function Dashboard() {
             </button>
           </div>
 
-          <button
-            className="w-full bg-blue-600 text-white p-3 rounded-lg hover:bg-blue-700 transition mb-4"
-            onClick={() => setShowScanner(true)}
-          >
-            Scan QR Code
-          </button>
-
-          {showScanner && (
-            <div className="mb-4">
-              <div ref={scannerRef} id="qr-reader" className="w-full" />
-              <p className="text-sm text-gray-600 text-center mt-2">
-                Point your camera at a QR code
-              </p>
-            </div>
-          )}
-
-          {scannedResult && (
-            <div className="bg-green-100 text-green-800 p-3 rounded-lg mt-4 text-center">
-              ✅ Scanned: {scannedResult}
-            </div>
-          )}
+          <QrScannerComponent />
         </div>
       </main>
     </>
+  );
+}
+
+// === QR SCANNER COMPONENT ===
+function QrScannerComponent() {
+  const [showScanner, setShowScanner] = useState(false);
+  const [scannedResult, setScannedResult] = useState<string | null>(null);
+  const scannerRef = useRef<HTMLDivElement>(null);
+  const html5QrCodeRef = useRef<Html5Qrcode | null>(null);
+
+  useEffect(() => {
+    if (showScanner && scannerRef.current) {
+      const config = { fps: 10, qrbox: 250 };
+
+      const qrCodeSuccessCallback = (decodedText: string) => {
+        setScannedResult(decodedText);
+        html5QrCodeRef.current?.stop().then(() => {
+          html5QrCodeRef.current?.clear();
+        });
+      };
+
+      html5QrCodeRef.current = new Html5Qrcode('qr-reader');
+
+      html5QrCodeRef.current
+        .start(
+          { facingMode: 'environment' },
+          config,
+          qrCodeSuccessCallback,
+          (errorMessage: string) => {
+            // Optional: handle scan errors here
+            console.warn('QR Code scan error:', errorMessage);
+          }
+        )
+        .catch((err) => {
+          console.error('Camera start error', err);
+        });
+    }
+
+    return () => {
+      if (html5QrCodeRef.current) {
+        html5QrCodeRef.current.stop().then(() => {
+          html5QrCodeRef.current?.clear();
+        });
+      }
+    };
+  }, [showScanner]);
+
+  return (
+    <div>
+      <button
+        className="w-full bg-blue-600 text-white p-3 rounded-lg hover:bg-blue-700 transition mb-4"
+        onClick={() => setShowScanner(true)}
+      >
+        Scan QR Code
+      </button>
+
+      {showScanner && (
+        <div className="mb-4">
+          <div ref={scannerRef} id="qr-reader" className="w-full" />
+          <p className="text-sm text-gray-600 text-center mt-2">
+            Point your camera at a QR code
+          </p>
+        </div>
+      )}
+
+      {scannedResult && (
+        <div className="bg-green-100 text-green-800 p-3 rounded-lg mt-4 text-center">
+          ✅ Scanned: {scannedResult}
+        </div>
+      )}
+    </div>
   );
 }
