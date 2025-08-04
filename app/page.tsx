@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useSwipeable } from 'react-swipeable';
+import { FaWhatsapp, FaBeer, FaCoffee, FaFacebook, FaTwitter, FaInstagram } from 'react-icons/fa';
 
 export default function Home() {
   const [isMobile, setIsMobile] = useState(false);
@@ -64,23 +65,131 @@ function MobileLayout() {
         }}
       >
         Log In
-      </button>
-      <a href="https://wa.me/256755958566?text=Hello%2C%20I%27m%20interested%20in%20your%20store%20products" target="_blank">
-      <button
-        style={{
-          position: 'fixed',
-          bottom: '100px',
+      </button>      
+      <a
+      href="https://wa.me/256755958566?text=Hello%2C%20I%27m%20interested%20in%20your%20store%20products"
+      target="_blank"
+      rel="noopener noreferrer"
+      style={{
+        position: 'fixed',
+          bottom: '160px',
           left: '12%',
           transform: 'translateX(-50%)',
-          backgroundColor: '#f78e16',
-          color: '#0a0a0a',
+          backgroundColor: 'green',
+          color: 'white',
           padding: '1rem 1.5rem',
           border: 'none',
           borderRadius: '1.75rem',
           cursor: 'pointer',
           fontWeight: 500,
           fontSize: '0.75rem',
-          width: '20%',
+          width: '23%',
+          zIndex: 1000,
+          display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    textAlign: 'center',
+      }}
+        >
+      💬YamahaCenter Branch
+    </a>
+    <a
+      href="https://wa.me/256755958566?text=Hello%2C%20I%27m%20interested%20in%20your%20store%20products"
+      target="_blank"
+      rel="noopener noreferrer"
+      style={{
+        position: 'fixed',
+          bottom: '160px',
+          left: '37%',
+          transform: 'translateX(-50%)',
+          backgroundColor: 'green',
+          color: 'white',
+          padding: '1rem 1.5rem',
+          border: 'none',
+          borderRadius: '1.75rem',
+          cursor: 'pointer',
+          fontWeight: 500,
+          fontSize: '0.75rem',
+          width: '23%',
+          zIndex: 1000,
+          display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    textAlign: 'center',
+      }}
+        >
+      💬Aponye Branch
+    </a>
+    <a
+      href="https://wa.me/256755958566?text=Hello%2C%20I%27m%20interested%20in%20your%20store%20products"
+      target="_blank"
+      rel="noopener noreferrer"
+      style={{
+        position: 'fixed',
+          bottom: '160px',
+          left: '62%',
+          transform: 'translateX(-50%)',
+          backgroundColor: 'green',
+          color: 'white',
+          padding: '1rem 1.5rem',
+          border: 'none',
+          borderRadius: '1.75rem',
+          cursor: 'pointer',
+          fontWeight: 500,
+          fontSize: '0.75rem',
+          width: '23%',
+          zIndex: 1000,
+          display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    textAlign: 'center',
+      }}
+        >
+      💬GardenCity Branch
+    </a>
+    <a
+      href="https://wa.me/256755958566?text=Hello%2C%20I%27m%20interested%20in%20your%20store%20products"
+      target="_blank"
+      rel="noopener noreferrer"
+      style={{
+        position: 'fixed',
+          bottom: '160px',
+          left: '88%',
+          transform: 'translateX(-50%)',
+          backgroundColor: 'green',
+          color: 'white',
+          padding: '1rem 1.5rem',
+          border: 'none',
+          borderRadius: '1.75rem',
+          cursor: 'pointer',
+          fontWeight: 500,
+          fontSize: '0.75rem',
+          width: '23%',
+          zIndex: 1000,
+          display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    textAlign: 'center',
+      }}
+        >
+      💬Lweeza Branch
+    </a>
+    <button
+      onClick={() => router.push('/login')}
+        style={{
+          position: 'fixed',
+          bottom: '80px',
+          left: '12%',
+          transform: 'translateX(-50%)',
+          backgroundColor: '#f78e16',
+          color: '#0a0a0a',
+          padding: '1rem 1.75rem',
+          border: 'none',
+          borderRadius: '1.75rem',
+          cursor: 'pointer',
+          fontWeight: 500,
+          fontSize: '0.75rem',
+          width: '23%',
           zIndex: 1000,
           display: 'flex',
     alignItems: 'center',
@@ -88,15 +197,14 @@ function MobileLayout() {
     textAlign: 'center',
         }}
       >
-        💬FeedBack
-      </button> 
-      </a>  
+        💰CashBack
+      </button>
       <button
       onClick={() => router.push('/login')}
         style={{
           position: 'fixed',
-          bottom: '100px',
-          left: '38%',
+          bottom: '80px',
+          left: '37%',
           transform: 'translateX(-50%)',
           backgroundColor: '#f78e16',
           color: '#0a0a0a',
@@ -106,7 +214,7 @@ function MobileLayout() {
           cursor: 'pointer',
           fontWeight: 500,
           fontSize: '0.75rem',
-          width: '20%',
+          width: '23%',
           zIndex: 1000,
           display: 'flex',
     alignItems: 'center',
@@ -120,7 +228,7 @@ function MobileLayout() {
       onClick={() => router.push('/login')}
         style={{
           position: 'fixed',
-          bottom: '100px',
+          bottom: '80px',
           left: '62%',
           transform: 'translateX(-50%)',
           backgroundColor: '#f78e16',
@@ -131,7 +239,7 @@ function MobileLayout() {
           cursor: 'pointer',
           fontWeight: 500,
           fontSize: '0.75rem',
-          width: '20%',
+          width: '23%',
           zIndex: 1000,
           display: 'flex',
     alignItems: 'center',
@@ -145,8 +253,8 @@ function MobileLayout() {
       onClick={() => router.push('/signup')}
         style={{
           position: 'fixed',
-          bottom: '100px',
-          left: '85%',
+          bottom: '80px',
+          left: '88%',
           transform: 'translateX(-50%)',
           backgroundColor: '#f78e16',
           color: '#0a0a0a',
@@ -156,7 +264,7 @@ function MobileLayout() {
           cursor: 'pointer',
           fontWeight: 500,
           fontSize: '0.75rem',
-          width: '20%',
+          width: '23%',
           zIndex: 1000,
           display: 'flex',
     alignItems: 'center',
@@ -189,7 +297,7 @@ function MobileLayout() {
     textAlign: 'center',       
         }}
       >
-        AponyeBranch:0709095815
+      AponyeBranch:0709095815
       </button>
       <button
       onClick={() => router.push('/login')}
@@ -293,8 +401,8 @@ function MobileLayout() {
       animation: 'scroll-left 12s linear infinite',
     }}
   >
-    🕒 Visit our new Lweza Branch open 24 hrs!
-    Enjoy Unlimited Shopping, Dining, and Stock Variety! 🕒
+    🕒 Visit our new Lweeza Branch open 24 hrs!     .
+        Enjoy Unlimited Shopping, Dining, and Stock Variety! 🕒
   </div>
 
   {/* CSS Keyframes inside <style> tag */}
