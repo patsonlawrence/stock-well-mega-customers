@@ -9,6 +9,9 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@capacitor/camera": "^7.0.1",
+    "@capacitor/geolocation": "^7.1.4",
+    "@capacitor/local-notifications": "^7.0.1",
     "html5-qrcode": "^2.3.8",
     "next": "15.4.4",
     "react": "19.1.0",

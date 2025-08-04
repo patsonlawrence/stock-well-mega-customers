@@ -602,3 +602,50 @@ function DesktopLayout() {
     </div>
   );
 }
+import { LocalNotifications } from '@capacitor/local-notifications';
+
+LocalNotifications.schedule({
+  notifications: [
+    {
+      title: "On sale",
+      body: "Widgets are 10% off. Act fast!",
+      id: 1,
+      schedule: { at: new Date(Date.now() + 1000 * 5) },
+      sound: undefined,
+      attachments: undefined,
+      actionTypeId: "",
+      extra: null
+    }
+  ]
+});
+import { Geolocation } from '@capacitor/geolocation';
+
+// get the users current position
+const position = await Geolocation.getCurrentPosition();
+
+// grab latitude & longitude
+const latitude = position.coords.latitude;
+const longitude = position.coords.longitude;
+import { Camera, CameraResultType } from '@capacitor/camera';
+
+// Take a picture or video, or load from the library
+const picture = await Camera.getPhoto({
+  resultType: CameraResultType.Uri
+});
+// The following Swift/iOS code is not valid in a TypeScript/React file and should be removed or moved to a native plugin implementation.
+/*
+import Foundation
+
+// Custom platform code, easily exposed to your web app
+// through Capacitor plugin APIs. Build APIs that work
+// across iOS, Android, and the web!
+@objc(MyAwesomePlugin)
+public class MyAwesomePlugin: CAPPlugin {
+
+  @objc public func doNative(_ call: CAPPluginCall) {
+    let alert = UIAlertController(title: "Title", message: "Please Select an Option", preferredStyle: .actionSheet)
+
+    // ....
+  }
+}
+*/
