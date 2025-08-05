@@ -1,13 +1,15 @@
 'use client';
 
 import Head from 'next/head';
-import { useRouter } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { Html5Qrcode } from 'html5-qrcode';
+import { EyeIcon, EyeSlashIcon } from '@heroicons/react/24/outline';
 
 export default function Dashboard() {
   const router = useRouter();
-  const [user, setUser] = useState<{ phone: string; name: string; points: number } | null>(null);
+  const [user, setUser] = useState<{ name: string; phone: string; points: number } | null>(null);
+  const [showPoints, setShowPoints] = useState(true);
 
   useEffect(() => {
     const loggedIn = localStorage.getItem('loggedIn');
@@ -23,7 +25,7 @@ export default function Dashboard() {
     setUser({
       name: userData.fullName,
       phone: userData.phone,
-      points: 12000, // Optionally fetch points dynamically
+      points: 12000,
     });
   }, [router]);
 
@@ -37,29 +39,44 @@ export default function Dashboard() {
       </Head>
 
       <main className="min-h-screen bg-gray-100 flex flex-col items-center justify-start py-6 px-4">
-        <div className="w-full max-w-sm bg-white rounded-xl shadow p-6">
-          <div className="text-center mb-6">
-            <h2 className="text-2xl font-bold">Welcome, {user.name}</h2>
-            <p className="text-gray-500 text-sm mt-1">{user.phone}</p>
+        <div className="w-full max-w-sm bg-white rounded-xl shadow p-6 space-y-6">
+          {/* Welcome and Info */}
+          <div>
+            <h2 className="text-xl font-bold mb-1">Welcome, {user.name} 👋</h2>
+            <p className="text-gray-600 mb-4">Phone: {user.phone}</p>
+
+            <div className="relative bg-blue-100 p-4 rounded-lg flex items-center justify-between">
+              <div>
+                <h3 className="text-sm text-blue-700 font-semibold">Points Balance</h3>
+                <p className="text-3xl font-bold text-blue-900">
+                  {showPoints ? user.points.toLocaleString() : '•••••'}
+                </p>
+              </div>
+              <button
+                onClick={() => setShowPoints((prev) => !prev)}
+                className="text-blue-700 hover:text-blue-900"
+              >
+                {showPoints ? (
+                  <EyeSlashIcon className="w-6 h-6" />
+                ) : (
+                  <EyeIcon className="w-6 h-6" />
+                )}
+              </button>
+            </div>
           </div>
 
-          <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 text-center mb-6">
-            <h3 className="text-lg font-semibold">Points Balance</h3>
-            <p className="text-3xl font-bold text-blue-600">{user.points}</p>
-          </div>
-
-          <div className="grid grid-cols-2 gap-4 text-center mb-6">
+          {/* Actions */}
+          <div className="grid grid-cols-2 gap-4">
             <a
-          href="/profile"
-          className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 transition"
-          >
-           View Profile
+              href="/profile"
+              className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 text-center"
+            >
+              View Profile
             </a>
-
-            <button className="bg-yellow-100 text-yellow-700 p-3 rounded-lg shadow hover:bg-yellow-200 transition">
+            <button className="bg-yellow-100 text-yellow-700 p-2 rounded-lg shadow hover:bg-yellow-200 transition">
               History
             </button>
-            <button className="bg-purple-100 text-purple-700 p-3 rounded-lg shadow hover:bg-purple-200 transition">
+            <button className="bg-purple-100 text-purple-700 p-2 rounded-lg shadow hover:bg-purple-200 transition">
               Settings
             </button>
             <button
@@ -74,6 +91,7 @@ export default function Dashboard() {
             </button>
           </div>
 
+          {/* QR Scanner */}
           <QrScannerComponent />
         </div>
       </main>
