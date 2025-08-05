@@ -275,7 +275,7 @@ function MobileLayout() {
         👤SignUp
       </button>
       <a
-      href="AponyeBranch:0751559938"
+      href="tel:0751559938"
         style={{
           position: 'fixed',
           top: '26px',
@@ -300,7 +300,7 @@ function MobileLayout() {
       AponyeBranch:0751559938
       </a>
       <a
-      href="GardenCityBra:0751559938"      
+      href="tel:0751559938"      
         style={{
           position: 'fixed',
           top: '51px',
@@ -325,7 +325,7 @@ function MobileLayout() {
         GardenCityBra:0751559938
       </a>
       <a
-      href="LweezaBranch:0751559938"
+      href="tel:0751559938"
         style={{
           position: 'fixed',
           top: '76px',
@@ -350,7 +350,7 @@ function MobileLayout() {
         LweazaBranch:0751559938
       </a>
       <a
-      href="YamahaBranch:0751559938"
+      href="tel:0751559938"
         style={{
           position: 'fixed',
           top: '1px',
