@@ -7,12 +7,12 @@
   "theme_color": "#000000",
   "icons": [
     {
-      "src": "/staicon.ico",
+      "src": "stalogo.png",
       "sizes": "192x192",
       "type": "image/ico"
     },
     {
-      "src": "/staicon.ico",
+      "src": "stalogo.png",
       "sizes": "512x512",
       "type": "image/png"
     }

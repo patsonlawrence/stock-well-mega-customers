@@ -274,8 +274,8 @@ function MobileLayout() {
       >
         👤SignUp
       </button>
-      <button
-      onClick={() => router.push('/signup')}
+      <a
+      href="AponyeBranch:0751559938"
         style={{
           position: 'fixed',
           top: '26px',
@@ -297,10 +297,10 @@ function MobileLayout() {
     textAlign: 'center',       
         }}
       >
-      AponyeBranch:0709095815
-      </button>
-      <button
-      onClick={() => router.push('/login')}
+      AponyeBranch:0751559938
+      </a>
+      <a
+      href="GardenCityBra:0751559938"      
         style={{
           position: 'fixed',
           top: '51px',
@@ -322,10 +322,10 @@ function MobileLayout() {
     textAlign: 'center',       
         }}
       >
-        GardenCityBra:07xxxxxxxx
-      </button>
-      <button
-      onClick={() => router.push('/login')}
+        GardenCityBra:0751559938
+      </a>
+      <a
+      href="LweezaBranch:0751559938"
         style={{
           position: 'fixed',
           top: '76px',
@@ -347,10 +347,10 @@ function MobileLayout() {
     textAlign: 'center',       
         }}
       >
-        LwezaBranch:07xxxxxxxx
-      </button>
-      <button
-      onClick={() => router.push('/login')}
+        LweazaBranch:0751559938
+      </a>
+      <a
+      href="YamahaBranch:0751559938"
         style={{
           position: 'fixed',
           top: '1px',
@@ -372,8 +372,8 @@ function MobileLayout() {
     textAlign: 'center',       
         }}
       >
-        YamahaBranch:0709095815
-      </button>
+        YamahaBranch:0751559938
+      </a>
     <div
   style={{
     position: 'fixed',
