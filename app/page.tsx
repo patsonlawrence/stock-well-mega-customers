@@ -182,7 +182,7 @@ function MobileLayout() {
           left: '12%',
           transform: 'translateX(-50%)',
           backgroundColor: '#f78e16',
-          color: '#0a0a0a',
+          color: 'green',
           padding: '1rem 1.75rem',
           border: '2px solid green',
           borderRadius: '1.75rem',

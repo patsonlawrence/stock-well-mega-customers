@@ -11,7 +11,7 @@ export default function Signup() {
     password: '',
     regDate: new Date().toISOString().split('T')[0],
     gender: '',
-    address: '',
+    tin: '',
     nextKinName: '',
     nextKinPhone: '',
     agree: false,
@@ -74,7 +74,7 @@ export default function Signup() {
               <option value="male">Male</option>
               <option value="other">Other</option>
             </select>
-            <input type="text" name="address" placeholder="Home Address" value={formData.address} onChange={handleChange} className="w-full p-2 border rounded" required />
+            <input type="text" name="tin" placeholder="Tax Identification Number" value={formData.tin} onChange={handleChange} className="w-full p-2 border rounded" required />
             <input type="text" name="nextKinName" placeholder="Next of Kin - Full Name" value={formData.nextKinName} onChange={handleChange} className="w-full p-2 border rounded" required />
             <input type="tel" name="nextKinPhone" placeholder="Next of Kin - Phone Number" value={formData.nextKinPhone} onChange={handleChange} className="w-full p-2 border rounded" required />
             <label className="flex items-center">

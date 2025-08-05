@@ -41,7 +41,12 @@ export default function Dashboard() {
 
           <div className="grid grid-cols-2 gap-4 text-center mb-6">
             <button className="bg-green-100 text-green-700 p-3 rounded-lg shadow hover:bg-green-200 transition">
-              Profile
+              <a
+  href="/profile"
+  className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 transition"
+>
+  View Profile
+</a>
             </button>
             <button className="bg-yellow-100 text-yellow-700 p-3 rounded-lg shadow hover:bg-yellow-200 transition">
               History
@@ -50,10 +55,13 @@ export default function Dashboard() {
               Settings
             </button>
             <button
-              className="bg-red-100 text-red-700 p-3 rounded-lg shadow hover:bg-red-200 transition"
-              onClick={() => router.push('/login')}
-            >
-              Logout
+              onClick={() => {
+    localStorage.removeItem('userProfile');
+    window.location.href = '/signup'; // or login
+  }}
+  className="bg-red-600 text-white px-4 py-2 rounded mt-4 hover:bg-red-700"
+>
+  Log Out
             </button>
           </div>
 
@@ -131,6 +139,41 @@ function QrScannerComponent() {
           ✅ Scanned: {scannedResult}
         </div>
       )}
+    </div>
+  );
+}
+function Profile() {
+  const [profile, setProfile] = useState<any>(null);
+
+  useEffect(() => {
+    const savedProfile = localStorage.getItem('userProfile');
+    if (savedProfile) {
+      setProfile(JSON.parse(savedProfile));
+    }
+  }, []);
+
+  if (!profile) {
+    return (
+      <div className="p-4 text-center">
+        <h2>No profile found.</h2>
+        <p>Please <a href="/signup" className="text-blue-500">sign up</a> first.</p>
+      </div>
+    );
+  }
+
+  return (
+    <div className="max-w-md mx-auto mt-10 bg-white shadow-lg p-6 rounded">
+      <h2 className="text-xl font-bold mb-4 text-center">👤 Profile</h2>
+      <ul className="space-y-2">
+        <li><strong>Name:</strong> {profile.fullName}</li>
+        <li><strong>Phone:</strong> {profile.phone}</li>
+        <li><strong>Email:</strong> {profile.email}</li>
+        <li><strong>Gender:</strong> {profile.gender}</li>
+        <li><strong>Address:</strong> {profile.address}</li>
+        <li><strong>Next of Kin:</strong> {profile.nextKinName}</li>
+        <li><strong>Next of Kin Phone:</strong> {profile.nextKinPhone}</li>
+        <li><strong>Registered On:</strong> {profile.regDate}</li>
+      </ul>
     </div>
   );
 }
