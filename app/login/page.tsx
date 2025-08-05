@@ -31,7 +31,7 @@ export default function Login() {
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
 
-    const stored = localStorage.getItem('userProfile');
+    const stored = localStorage.getItem('userProfiles');
     if (!stored) {
       alert('No user found. Please sign up first.');
       return;
@@ -49,7 +49,7 @@ export default function Login() {
       // ✅ Save login state only if "Remember Me" is checked
       if (input.remember) {
        // localStorage.setItem('loggedIn', 'true');
-        const stored = localStorage.getItem('userProfile');
+        const stored = localStorage.getItem('userProfiles');
 
       }
 

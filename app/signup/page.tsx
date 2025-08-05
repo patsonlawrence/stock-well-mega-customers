@@ -33,15 +33,53 @@ export default function Signup() {
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    if (!formData.agree) {
-      alert('You must agree to the terms.');
-      return;
-    }
-    console.log('Submitted:', formData);
-    alert('Signup successful!');
-  };
+  e.preventDefault();
 
+  if (!formData.agree) {
+    alert('You must agree to the terms.');
+    return;
+  }
+
+  // 🔄 Get existing users from localStorage
+  const existingUsers = JSON.parse(localStorage.getItem('userProfiles') || '[]');
+
+  // 🔍 Check if email or phone already exists
+  const userExists = existingUsers.some((user: any) =>
+    user.email.toLowerCase() === formData.email.toLowerCase() ||
+    user.phone === formData.phone
+  );
+
+  if (userExists) {
+    alert('User with this email or phone number already exists.');
+    return;
+  }
+
+  // ✅ Save the new user to the array
+  const updatedUsers = [...existingUsers, {
+    ...formData,
+    email: formData.email.toLowerCase().trim(),
+  }];
+  localStorage.setItem('userProfiles', JSON.stringify(updatedUsers));
+
+  alert('Signup successful!');
+  console.log('Saved user:', formData);
+
+  // 🔄 Reset form
+  setFormData({
+    fullName: '',
+    phone: '',
+    email: '',
+    password: '',
+    regDate: new Date().toISOString().split('T')[0],
+    gender: '',
+    tin: '',
+    nextKinName: '',
+    nextKinPhone: '',
+    agree: false,
+    
+  });
+  window.location.href = '/signin';
+};
   return (
     <>
       <Head>
