@@ -67,7 +67,7 @@ function MobileLayout() {
         Log In
       </button>      
       <a
-      href="https://wa.me/256755958566?text=Hello%2C%20I%27m%20interested%20in%20your%20store%20products"
+      href="https://wa.me/256751559938?text=Hello%2C%20I%27m%20interested%20in%20your%20store%20products"
       target="_blank"
       rel="noopener noreferrer"
       style={{
@@ -75,10 +75,10 @@ function MobileLayout() {
           bottom: '160px',
           left: '12%',
           transform: 'translateX(-50%)',
-          backgroundColor: 'green',
-          color: 'white',
+          backgroundColor: 'white',
+          color: 'green',
           padding: '1rem 1.5rem',
-          border: 'none',
+          border: '2px solid green',
           borderRadius: '1.75rem',
           cursor: 'pointer',
           fontWeight: 500,
@@ -94,7 +94,7 @@ function MobileLayout() {
       💬YamahaCenter Branch
     </a>
     <a
-      href="https://wa.me/256755958566?text=Hello%2C%20I%27m%20interested%20in%20your%20store%20products"
+      href="https://wa.me/256751559938?text=Hello%2C%20I%27m%20interested%20in%20your%20store%20products"
       target="_blank"
       rel="noopener noreferrer"
       style={{
@@ -102,10 +102,10 @@ function MobileLayout() {
           bottom: '160px',
           left: '37%',
           transform: 'translateX(-50%)',
-          backgroundColor: 'green',
-          color: 'white',
+          backgroundColor: 'white',
+          color: 'green',
           padding: '1rem 1.5rem',
-          border: 'none',
+          border: '2px solid green',
           borderRadius: '1.75rem',
           cursor: 'pointer',
           fontWeight: 500,
@@ -121,7 +121,7 @@ function MobileLayout() {
       💬Aponye Branch
     </a>
     <a
-      href="https://wa.me/256755958566?text=Hello%2C%20I%27m%20interested%20in%20your%20store%20products"
+      href="https://wa.me/256751559938?text=Hello%2C%20I%27m%20interested%20in%20your%20store%20products"
       target="_blank"
       rel="noopener noreferrer"
       style={{
@@ -129,10 +129,10 @@ function MobileLayout() {
           bottom: '160px',
           left: '62%',
           transform: 'translateX(-50%)',
-          backgroundColor: 'green',
-          color: 'white',
+          backgroundColor: 'white',
+          color: 'green',
           padding: '1rem 1.5rem',
-          border: 'none',
+          border: '2px solid green',
           borderRadius: '1.75rem',
           cursor: 'pointer',
           fontWeight: 500,
@@ -148,7 +148,7 @@ function MobileLayout() {
       💬GardenCity Branch
     </a>
     <a
-      href="https://wa.me/256755958566?text=Hello%2C%20I%27m%20interested%20in%20your%20store%20products"
+      href="https://wa.me/256751559938?text=Hello%2C%20I%27m%20interested%20in%20your%20store%20products"
       target="_blank"
       rel="noopener noreferrer"
       style={{
@@ -156,10 +156,10 @@ function MobileLayout() {
           bottom: '160px',
           left: '88%',
           transform: 'translateX(-50%)',
-          backgroundColor: 'green',
-          color: 'white',
+          backgroundColor: 'white',
+          color: 'green',
           padding: '1rem 1.5rem',
-          border: 'none',
+          border: '2px solid green',
           borderRadius: '1.75rem',
           cursor: 'pointer',
           fontWeight: 500,
@@ -184,7 +184,7 @@ function MobileLayout() {
           backgroundColor: '#f78e16',
           color: '#0a0a0a',
           padding: '1rem 1.75rem',
-          border: 'none',
+          border: '2px solid green',
           borderRadius: '1.75rem',
           cursor: 'pointer',
           fontWeight: 500,
@@ -207,9 +207,9 @@ function MobileLayout() {
           left: '37%',
           transform: 'translateX(-50%)',
           backgroundColor: '#f78e16',
-          color: '#0a0a0a',
+          color: 'green',
           padding: '1rem 1.5rem',
-          border: 'none',
+          border: '2px solid green',
           borderRadius: '1.75rem',
           cursor: 'pointer',
           fontWeight: 500,
@@ -232,9 +232,9 @@ function MobileLayout() {
           left: '62%',
           transform: 'translateX(-50%)',
           backgroundColor: '#f78e16',
-          color: '#0a0a0a',
+          color: 'green',
           padding: '1rem 1.5rem',
-          border: 'none',
+          border: '2px solid green',
           borderRadius: '1.75rem',
           cursor: 'pointer',
           fontWeight: 500,
@@ -257,9 +257,9 @@ function MobileLayout() {
           left: '88%',
           transform: 'translateX(-50%)',
           backgroundColor: '#f78e16',
-          color: '#0a0a0a',
+          color: 'green',
           padding: '1rem 1.75rem',
-          border: 'none',
+          border: '2px solid green',
           borderRadius: '1.75rem',
           cursor: 'pointer',
           fontWeight: 500,
