@@ -75,10 +75,12 @@ export default function Signup() {
     tin: '',
     nextKinName: '',
     nextKinPhone: '',
-    agree: false,
-    
+    agree: false,    
   });
-  window.location.href = '/signin';
+  const redirectToSignin = () => {
+  if (typeof window !== 'undefined') {
+    window.location.href = '/signin';}
+  }
 };
   return (
     <>

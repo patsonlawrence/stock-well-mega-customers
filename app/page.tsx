@@ -479,10 +479,12 @@ function CustomerCarousel() {
   return () => clearInterval(interval);
 }, [isPaused, images.length]);
 
-  const isTouchDevice = () =>
-    typeof window !== 'undefined' &&
-    ('ontouchstart' in window || navigator.maxTouchPoints > 0);
-
+  const isTouchDevice = () => {
+  if (typeof window !== 'undefined' && typeof navigator !== 'undefined') {
+    return 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+  }
+  return false;
+};
   const swipeOptions: any = {
   onSwipedLeft: goToNext,
   onSwipedRight: goToPrev,
