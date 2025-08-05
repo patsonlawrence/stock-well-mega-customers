@@ -38,8 +38,9 @@ export default function Login() {
     }
 
     const user = JSON.parse(stored);
-    const usernameMatch =
-      input.username === user.email || input.username === user.phone;
+    const username = input.username.trim();
+    const password = input.password.trim();
+    const usernameMatch = input.username === user.email || input.username === user.phone;
     const passwordMatch = input.password === user.password;
 
     if (usernameMatch && passwordMatch) {
@@ -47,7 +48,9 @@ export default function Login() {
 
       // ✅ Save login state only if "Remember Me" is checked
       if (input.remember) {
-        localStorage.setItem('loggedIn', 'true');
+       // localStorage.setItem('loggedIn', 'true');
+        const stored = localStorage.getItem('userProfile');
+
       }
 
       router.push('/dashboard');
@@ -109,6 +112,7 @@ export default function Login() {
             <button
               type="submit"
               className="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition"
+              
             >
               Log In
             </button>
