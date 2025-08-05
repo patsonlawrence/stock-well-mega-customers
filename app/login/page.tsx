@@ -29,35 +29,35 @@ export default function Login() {
   };
 
   const handleLogin = (e: React.FormEvent) => {
-    e.preventDefault();
+  e.preventDefault();
 
-    const stored = localStorage.getItem('userProfiles');
-    if (!stored) {
-      alert('No user found. Please sign up first.');
-      return;
+  const stored = localStorage.getItem('userProfiles');
+  if (!stored) {
+    alert('No user found. Please sign up first.');
+    return;
+  }
+
+  const users = JSON.parse(stored); // ⬅️ This is now an array
+
+  const foundUser = users.find((user: any) =>
+    (input.username === user.email || input.username === user.phone) &&
+    input.password === user.password
+  );
+
+  if (foundUser) {
+    alert('Login successful!');
+
+    if (input.remember) {
+      localStorage.setItem('loggedIn', 'true');
+      localStorage.setItem('loggedInUser', JSON.stringify(foundUser));
     }
 
-    const user = JSON.parse(stored);
-    const username = input.username.trim();
-    const password = input.password.trim();
-    const usernameMatch = input.username === user.email || input.username === user.phone;
-    const passwordMatch = input.password === user.password;
+    router.push('/dashboard');
+  } else {
+    alert('Incorrect email/phone or password.');
+  }
+};
 
-    if (usernameMatch && passwordMatch) {
-      alert('Login successful!');
-
-      // ✅ Save login state only if "Remember Me" is checked
-      if (input.remember) {
-       // localStorage.setItem('loggedIn', 'true');
-        const stored = localStorage.getItem('userProfiles');
-
-      }
-
-      router.push('/dashboard');
-    } else {
-      alert('Incorrect email/phone or password.');
-    }
-  };
 
   return (
     <>

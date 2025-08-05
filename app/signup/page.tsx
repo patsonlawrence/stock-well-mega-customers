@@ -51,6 +51,7 @@ export default function Signup() {
 
   if (userExists) {
     alert('User with this email or phone number already exists.');
+    window.location.href = '/login';
     return;
   }
 
@@ -77,10 +78,8 @@ export default function Signup() {
     nextKinPhone: '',
     agree: false,    
   });
-  const redirectToSignin = () => {
-  if (typeof window !== 'undefined') {
-    window.location.href = '/signin';}
-  }
+    window.location.href = '/login'
+  
 };
   return (
     <>

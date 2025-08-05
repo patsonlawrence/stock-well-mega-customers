@@ -7,23 +7,32 @@ import { Html5Qrcode } from 'html5-qrcode';
 
 export default function Dashboard() {
   const router = useRouter();
-
-  const user = {
-    phone: '0709123456',
-    name: 'Mukasa Peter',
-    points: 12000,
-  };
+  const [user, setUser] = useState<{ phone: string; name: string; points: number } | null>(null);
 
   useEffect(() => {
-    if (!user) {
+    const loggedIn = localStorage.getItem('loggedIn');
+    const storedUser = localStorage.getItem('loggedInUser');
+
+    if (!loggedIn || !storedUser) {
+      alert('Please log in first.');
       router.push('/login');
+      return;
     }
-  }, []);
+
+    const userData = JSON.parse(storedUser);
+    setUser({
+      name: userData.fullName,
+      phone: userData.phone,
+      points: 12000, // Optionally fetch points dynamically
+    });
+  }, [router]);
+
+  if (!user) return <p className="text-center mt-10">Loading user data...</p>;
 
   return (
     <>
       <Head>
-        <title>Phone Dashboard</title>
+        <title>Dashboard</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </Head>
 
@@ -40,14 +49,13 @@ export default function Dashboard() {
           </div>
 
           <div className="grid grid-cols-2 gap-4 text-center mb-6">
-            <button className="bg-green-100 text-green-700 p-3 rounded-lg shadow hover:bg-green-200 transition">
-              <a
-  href="/profile"
-  className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 transition"
->
-  View Profile
-</a>
-            </button>
+            <a
+          href="/profile"
+          className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 transition"
+          >
+           View Profile
+            </a>
+
             <button className="bg-yellow-100 text-yellow-700 p-3 rounded-lg shadow hover:bg-yellow-200 transition">
               History
             </button>
@@ -56,12 +64,13 @@ export default function Dashboard() {
             </button>
             <button
               onClick={() => {
-    localStorage.removeItem('userProfile');
-    window.location.href = '/signup'; // or login
-  }}
-  className="bg-red-600 text-white px-4 py-2 rounded mt-4 hover:bg-red-700"
->
-  Log Out
+                localStorage.removeItem('loggedInUser');
+                localStorage.removeItem('loggedIn');
+                window.location.href = '/login';
+              }}
+              className="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700"
+            >
+              Log Out
             </button>
           </div>
 
@@ -98,7 +107,6 @@ function QrScannerComponent() {
           config,
           qrCodeSuccessCallback,
           (errorMessage: string) => {
-            // Optional: handle scan errors here
             console.warn('QR Code scan error:', errorMessage);
           }
         )
@@ -139,41 +147,6 @@ function QrScannerComponent() {
           ✅ Scanned: {scannedResult}
         </div>
       )}
-    </div>
-  );
-}
-function Profile() {
-  const [profile, setProfile] = useState<any>(null);
-
-  useEffect(() => {
-    const savedProfile = localStorage.getItem('userProfile');
-    if (savedProfile) {
-      setProfile(JSON.parse(savedProfile));
-    }
-  }, []);
-
-  if (!profile) {
-    return (
-      <div className="p-4 text-center">
-        <h2>No profile found.</h2>
-        <p>Please <a href="/signup" className="text-blue-500">sign up</a> first.</p>
-      </div>
-    );
-  }
-
-  return (
-    <div className="max-w-md mx-auto mt-10 bg-white shadow-lg p-6 rounded">
-      <h2 className="text-xl font-bold mb-4 text-center">👤 Profile</h2>
-      <ul className="space-y-2">
-        <li><strong>Name:</strong> {profile.fullName}</li>
-        <li><strong>Phone:</strong> {profile.phone}</li>
-        <li><strong>Email:</strong> {profile.email}</li>
-        <li><strong>Gender:</strong> {profile.gender}</li>
-        <li><strong>Address:</strong> {profile.address}</li>
-        <li><strong>Next of Kin:</strong> {profile.nextKinName}</li>
-        <li><strong>Next of Kin Phone:</strong> {profile.nextKinPhone}</li>
-        <li><strong>Registered On:</strong> {profile.regDate}</li>
-      </ul>
     </div>
   );
 }
