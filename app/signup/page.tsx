@@ -100,7 +100,7 @@ export default function Signup() {
           className="mb-4"
         />
         
-          <h2 className="text-2xl font-bold text-center mb-6">Sign Up & Earn</h2>
+          <h2 className="text-2xl font-bold text-center mb-6">Aponye Sign Up & Earn</h2>
           <form className="space-y-4" onSubmit={handleSubmit}>
             <input type="text" name="fullName" placeholder="Full Name" value={formData.fullName} onChange={handleChange} className="w-full p-2 border rounded" required />
             <input type="tel" name="phone" placeholder="Phone Number" value={formData.phone} onChange={handleChange} className="w-full p-2 border rounded" required />

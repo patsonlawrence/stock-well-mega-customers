@@ -40,7 +40,7 @@ export default function ProfilePage() {
           className="mb-4"
           style={{ display: 'block', margin: '0 auto', textAlign: 'center' }}
         />
-        <h1 className="text-2xl font-bold text-center mb-4">👤 Profile</h1>
+        <h1 className="text-2xl font-bold text-center mb-4">👤 Aponye Profile</h1>
         <ul className="space-y-2 text-gray-700">
           <li><strong>Name:</strong> {profile.fullName}</li>
           <li><strong>Phone:</strong> {profile.phone}</li>

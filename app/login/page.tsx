@@ -62,7 +62,7 @@ export default function Login() {
   return (
     <>
       <Head>
-        <title>Login</title>
+        <title>Aponye Login</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </Head>
       <div className="flex items-center justify-center min-h-screen bg-gray-100 px-4">
