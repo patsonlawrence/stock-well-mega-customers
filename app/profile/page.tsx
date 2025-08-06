@@ -32,6 +32,14 @@ export default function ProfilePage() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100 p-6">
       <div className="bg-white rounded-lg shadow-md p-8 w-full max-w-md">
+        <img
+          src="/logos/stalogo.PNG"
+          alt="Standard Logo"
+          width={100}
+          height={100}
+          className="mb-4"
+          style={{ display: 'block', margin: '0 auto', textAlign: 'center' }}
+        />
         <h1 className="text-2xl font-bold text-center mb-4">👤 Profile</h1>
         <ul className="space-y-2 text-gray-700">
           <li><strong>Name:</strong> {profile.fullName}</li>
@@ -48,7 +56,7 @@ export default function ProfilePage() {
           className="mt-6 w-full bg-red-600 text-white py-2 rounded hover:bg-red-700 transition"
           onClick={() => {
             localStorage.removeItem('loggedIn');
-            router.push('/login');
+            router.push('/Home');
           }}
         >
           Log Out

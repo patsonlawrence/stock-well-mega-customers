@@ -41,8 +41,18 @@ export default function Dashboard() {
       <main className="min-h-screen bg-gray-100 flex flex-col items-center justify-start py-6 px-4">
         <div className="w-full max-w-sm bg-white rounded-xl shadow p-6 space-y-6">
           {/* Welcome and Info */}
+          <img
+          src="/logos/stalogo.PNG"
+          alt="Standard Logo"
+          width={100}
+          height={100}
+          className="mb-4"
+          //align="center"
+          style={{ display: 'block', margin: '0 auto', textAlign: 'center' }}
+        />
           <div>
-            <h2 className="text-xl font-bold mb-1">Welcome, {user.name} 👋</h2>
+            <h2 className="text-xl font-bold mb-1">Welcome 👋</h2>
+            <h2 className="text-xl font-bold mb-1">{user.name} </h2>
             <p className="text-gray-600 mb-4">Phone: {user.phone}</p>
 
             <div className="relative bg-blue-100 p-4 rounded-lg flex items-center justify-between">

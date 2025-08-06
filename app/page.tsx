@@ -278,18 +278,18 @@ function MobileLayout() {
       href="tel:0751559938"
         style={{
           position: 'fixed',
-          top: '26px',
-          left: '65%',
+          top: '2px',
+          left: '82%',
           transform: 'translateX(-50%)',
           backgroundColor: '#035706',
           color: '#ffffff',
-          padding: '0.010rem 6.5rem',
+          padding: '0.010rem 4.0rem',
           border: 'none',
           borderRadius: '1.75rem',
           cursor: 'pointer',
           fontWeight: 500,
           fontSize: '1rem',
-          width: '70%',
+          width: '30%',
           zIndex: 1000,
           display: 'flex',
     alignItems: 'center',
@@ -297,24 +297,24 @@ function MobileLayout() {
     textAlign: 'center',       
         }}
       >
-      AponyeBranch:0751559938
+      AponyeBranch 0751559938
       </a>
       <a
       href="tel:0751559938"      
         style={{
           position: 'fixed',
           top: '51px',
-          left: '65%',
+          left: '46%',
           transform: 'translateX(-50%)',
           backgroundColor: '#048a09',
           color: '#ffffff',
-          padding: '0.010rem 6.5rem',
+          padding: '0.010rem 4.0rem',
           border: 'none',
           borderRadius: '1.75rem',
           cursor: 'pointer',
           fontWeight: 500,
           fontSize: '1rem',
-          width: '70%',
+          width: '30%',
           zIndex: 1000,
           display: 'flex',
     alignItems: 'center',
@@ -322,24 +322,24 @@ function MobileLayout() {
     textAlign: 'center',       
         }}
       >
-        GardenCityBra:0751559938
+        GardenCityBra 0751559938
       </a>
       <a
       href="tel:0751559938"
         style={{
           position: 'fixed',
-          top: '76px',
-          left: '65%',
+          top: '51px',
+          left: '82%',
           transform: 'translateX(-50%)',
-          backgroundColor: '#09e311',
+          backgroundColor: 'maroon',
           color: '#ffffff',
-          padding: '0.010rem 6.5rem',
+          padding: '0.010rem 4.0rem',
           border: 'none',
           borderRadius: '1.75rem',
           cursor: 'pointer',
           fontWeight: 500,
           fontSize: '1rem',
-          width: '70%',
+          width: '30%',
           zIndex: 1000,
           display: 'flex',
     alignItems: 'center',
@@ -347,24 +347,24 @@ function MobileLayout() {
     textAlign: 'center',       
         }}
       >
-        LweazaBranch:0751559938
+        LweezaBranch 0751559938
       </a>
       <a
       href="tel:0751559938"
         style={{
           position: 'fixed',
-          top: '1px',
-          left: '65%',
+          top: '2px',
+          left: '46%',
           transform: 'translateX(-50%)',
-          backgroundColor: '#012e03',
+          backgroundColor: 'maroon',
           color: '#ffffff',
-          padding: '0.010rem 6.5rem',
+          padding: '0.010rem 4.0rem',
           border: 'none',
           borderRadius: '1.75rem',
           cursor: 'pointer',
           fontWeight: 500,
           fontSize: '1rem',
-          width: '70%',
+          width: '30%',
           zIndex: 1000,
           display: 'flex',
     alignItems: 'center',
@@ -372,7 +372,7 @@ function MobileLayout() {
     textAlign: 'center',       
         }}
       >
-        YamahaBranch:0751559938
+        YamahaBranch 0751559938
       </a>
     <div
   style={{
