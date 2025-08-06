@@ -67,32 +67,44 @@ function MobileLayout() {
         Log In
       </button>      
       <a
-      href="https://wa.me/256751559938?text=Hello%2C%20I%27m%20interested%20in%20your%20store%20products"
-      target="_blank"
-      rel="noopener noreferrer"
-      style={{
-        position: 'fixed',
-          bottom: '160px',
-          left: '12%',
-          transform: 'translateX(-50%)',
-          backgroundColor: 'white',
-          color: 'green',
-          padding: '1rem 1.5rem',
-          border: '2px solid green',
-          borderRadius: '1.75rem',
-          cursor: 'pointer',
-          fontWeight: 500,
-          fontSize: '0.75rem',
-          width: '23%',
-          zIndex: 1000,
-          display: 'flex',
+  href="https://wa.me/256751559938?text=Hello%2C%20I%27m%20interested%20in%20your%20store%20products"
+  target="_blank"
+  rel="noopener noreferrer"
+  style={{
+    position: 'fixed',
+    bottom: '160px',
+    left: '12%',
+    transform: 'translateX(-50%)',
+    backgroundColor: 'white',
+    color: 'green',
+    padding: '1rem 1.5rem',
+    border: '2px solid green',
+    borderRadius: '1.75rem',
+    cursor: 'pointer',
+    fontWeight: 500,
+    fontSize: '0.75rem',
+    width: '23%',
+    zIndex: 1000,
+    display: 'flex',
+    flexDirection: 'column',     // ✅ stack vertically
     alignItems: 'center',
     justifyContent: 'center',
     textAlign: 'center',
-      }}
-        >
-      💬YamahaCenter Branch
-    </a>
+  }}
+>
+  <img
+    src="/logos/whatsapp.PNG"
+    alt="WhatsApp Icon"
+    style={{
+      width: '15px',
+      height: '15px',
+      marginBottom: '1px',
+      objectFit: 'contain',      // ✅ ensures proper fit
+    }}
+  />
+  YamahaCenter Branch
+</a>
+
     <a
       href="https://wa.me/256751559938?text=Hello%2C%20I%27m%20interested%20in%20your%20store%20products"
       target="_blank"
@@ -111,17 +123,28 @@ function MobileLayout() {
           fontWeight: 500,
           fontSize: '0.75rem',
           width: '23%',
+          flexDirection: 'column', 
           zIndex: 1000,
           display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
     textAlign: 'center',
       }}
-        >
-      💬Aponye Branch
+       >
+  <img
+    src="/logos/whatsapp.PNG"
+    alt="WhatsApp Icon"
+    style={{
+      width: '15px',
+      height: '15px',
+      marginBottom: '1px',
+      objectFit: 'contain',      // ✅ ensures proper fit
+    }}
+  />
+  Aponye Branch
     </a>
     <a
-      href="https://wa.me/256751559938?text=Hello%2C%20I%27m%20interested%20in%20your%20store%20products"
+      href="https://wa.me/256761415961?text=Hello%2C%20I%27m%20interested%20in%20your%20store%20products"
       target="_blank"
       rel="noopener noreferrer"
       style={{
@@ -138,6 +161,7 @@ function MobileLayout() {
           fontWeight: 500,
           fontSize: '0.75rem',
           width: '23%',
+          flexDirection: 'column', 
           zIndex: 1000,
           display: 'flex',
     alignItems: 'center',
@@ -145,10 +169,20 @@ function MobileLayout() {
     textAlign: 'center',
       }}
         >
-      💬GardenCity Branch
+  <img
+    src="/logos/whatsapp.PNG"
+    alt="WhatsApp Icon"
+    style={{
+      width: '15px',
+      height: '15px',
+      marginBottom: '1px',
+      objectFit: 'contain',      // ✅ ensures proper fit
+    }}
+  />
+  GardenCity Branch
     </a>
     <a
-      href="https://wa.me/256751559938?text=Hello%2C%20I%27m%20interested%20in%20your%20store%20products"
+      href="https://wa.me/256757693543?text=Hello%2C%20I%27m%20interested%20in%20your%20store%20products"
       target="_blank"
       rel="noopener noreferrer"
       style={{
@@ -165,14 +199,25 @@ function MobileLayout() {
           fontWeight: 500,
           fontSize: '0.75rem',
           width: '23%',
+          flexDirection: 'column', 
           zIndex: 1000,
           display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
     textAlign: 'center',
       }}
-        >
-      💬Lweeza Branch
+       >
+  <img
+    src="/logos/whatsapp.PNG"
+    alt="WhatsApp Icon"
+    style={{
+      width: '15px',
+      height: '15px',
+      marginBottom: '1px',
+      objectFit: 'contain',      // ✅ ensures proper fit
+    }}
+  />
+  Lweeza Branch
     </a>
     <button
       onClick={() => router.push('/login')}
@@ -300,7 +345,7 @@ function MobileLayout() {
       AponyeBranch 0751559938
       </a>
       <a
-      href="tel:0751559938"      
+      href="tel:0751712475"      
         style={{
           position: 'fixed',
           top: '51px',
@@ -322,10 +367,10 @@ function MobileLayout() {
     textAlign: 'center',       
         }}
       >
-        GardenCityBra 0751559938
+        GardenCityBra 0751712475
       </a>
       <a
-      href="tel:0751559938"
+      href="tel:0757693543"
         style={{
           position: 'fixed',
           top: '51px',
@@ -347,7 +392,7 @@ function MobileLayout() {
     textAlign: 'center',       
         }}
       >
-        LweezaBranch 0751559938
+        LweezaBranch 0757693543
       </a>
       <a
       href="tel:0751559938"

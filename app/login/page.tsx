@@ -132,7 +132,7 @@ export default function Login() {
         style={{
           position: 'fixed',
           bottom: '20px',
-          left: '30%',
+          left: '50%',
           transform: 'translateX(-50%)',
           backgroundColor: 'gray',
           color: '#ffffff',
@@ -142,7 +142,7 @@ export default function Login() {
           cursor: 'pointer',
           fontWeight: 500,
           fontSize: '1rem',
-          width: '25%',
+          width: '50%',
           zIndex: 1000,
         }}
       >
