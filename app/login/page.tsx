@@ -75,7 +75,7 @@ export default function Login() {
           className="mb-4"
           style={{ display: 'block', margin: '0 auto', textAlign: 'center' }}
         />
-          <h2 className="text-2xl font-bold text-center mb-6">Login</h2>
+          <h2 className="text-2xl font-bold text-center mb-6">Aponye Login</h2>
           <form className="space-y-5" onSubmit={handleLogin}>
             <div>
               <label htmlFor="username" className="block text-sm font-medium text-gray-600">

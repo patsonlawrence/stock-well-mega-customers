@@ -6,10 +6,19 @@ import { useRouter } from 'next/navigation';
 import { Html5Qrcode } from 'html5-qrcode';
 import { EyeIcon, EyeSlashIcon } from '@heroicons/react/24/outline';
 
+type Transaction = {
+  points: number;
+  date: string;
+  receiptNumber: string;
+};
+
 export default function Dashboard() {
   const router = useRouter();
   const [user, setUser] = useState<{ name: string; phone: string; points: number } | null>(null);
   const [showPoints, setShowPoints] = useState(true);
+  const [points, setPoints] = useState<number>(0);
+  const [history, setHistory] = useState<Transaction[]>([]);
+  const [showHistory, setShowHistory] = useState(false);
 
   useEffect(() => {
     const loggedIn = localStorage.getItem('loggedIn');
@@ -22,12 +31,34 @@ export default function Dashboard() {
     }
 
     const userData = JSON.parse(storedUser);
+    const initialPoints = 12000;
     setUser({
       name: userData.fullName,
       phone: userData.phone,
-      points: 12000,
+      points: initialPoints,
     });
+    setPoints(initialPoints);
+
+    const storedHistory = localStorage.getItem('transactionHistory');
+    if (storedHistory) {
+      setHistory(JSON.parse(storedHistory));
+    }
   }, [router]);
+
+  const handleScan = (newPoints: number, date: string, receiptNumber: string) => {
+    const isDuplicate = history.some((tx) => tx.receiptNumber === receiptNumber);
+    if (isDuplicate) {
+      alert('❌ This QR code has already been scanned.');
+      return;
+    }
+
+    setPoints(newPoints); // ✅ Replace total points (not add)
+
+    const newTx: Transaction = { points: newPoints, date, receiptNumber };
+    const updatedHistory = [newTx, ...history].slice(0, 5);
+    setHistory(updatedHistory);
+    localStorage.setItem('transactionHistory', JSON.stringify(updatedHistory));
+  };
 
   if (!user) return <p className="text-center mt-10">Loading user data...</p>;
 
@@ -42,24 +73,23 @@ export default function Dashboard() {
         <div className="w-full max-w-sm bg-white rounded-xl shadow p-6 space-y-6">
           {/* Welcome and Info */}
           <img
-          src="/logos/stalogo.PNG"
-          alt="Standard Logo"
-          width={100}
-          height={100}
-          className="mb-4"
-          //align="center"
-          style={{ display: 'block', margin: '0 auto', textAlign: 'center' }}
-        />
+            src="/logos/stalogo.PNG"
+            alt="Standard Logo"
+            width={100}
+            height={100}
+            className="mb-4"
+            style={{ display: 'block', margin: '0 auto' }}
+          />
           <div>
-            <h2 className="text-xl font-bold mb-1">Welcome 👋 </h2>            
-            <h2 className="text-xl font-bold mb-1">{user.name} </h2>
+            <h2 className="text-xl font-bold mb-1">Welcome 👋 </h2>
+            <h2 className="text-xl font-bold mb-1">{user.name}</h2>
             <p className="text-gray-600 mb-4">Phone: {user.phone}</p>
-            
+
             <div className="relative bg-blue-100 p-4 rounded-lg flex items-center justify-between">
               <div>
                 <h3 className="text-sm text-blue-700 font-semibold">Points Balance</h3>
                 <p className="text-3xl font-bold text-blue-900">
-                  {showPoints ? user.points.toLocaleString() : '•••••'}
+                  {showPoints ? points.toLocaleString() : '•••••'}
                 </p>
               </div>
               <button
@@ -74,6 +104,7 @@ export default function Dashboard() {
               </button>
             </div>
           </div>
+
           {/* Actions */}
           <div className="grid grid-cols-2 gap-4">
             <a
@@ -82,8 +113,11 @@ export default function Dashboard() {
             >
               View Profile
             </a>
-            <button className="bg-yellow-100 text-yellow-700 p-2 rounded-lg shadow hover:bg-yellow-200 transition">
-              History
+            <button
+              onClick={() => setShowHistory((prev) => !prev)}
+              className="bg-yellow-100 text-yellow-700 p-2 rounded-lg shadow hover:bg-yellow-200 transition"
+            >
+              {showHistory ? 'Hide History' : 'History'}
             </button>
             <button className="bg-purple-100 text-purple-700 p-2 rounded-lg shadow hover:bg-purple-200 transition">
               Settings
@@ -101,7 +135,43 @@ export default function Dashboard() {
           </div>
 
           {/* QR Scanner */}
-          <QrScannerComponent />
+          <QrScannerComponent userPhone={user.phone} onScan={handleScan} />
+
+          {/* History Display */}
+          {showHistory && (
+          <div className="fixed inset-0 bg-black bg-opacity-40 flex items-end justify-center z-50">
+            <div className="w-full max-w-md bg-white rounded-t-xl p-4 max-h-[80vh] overflow-y-auto">
+              <div className="flex justify-between items-center mb-4">
+                  <h3 className="text-lg font-semibold">🧾 Last 5 Transactions</h3>
+                  <button
+                    onClick={() => setShowHistory(false)}
+                    className="text-red-600 font-semibold text-sm"
+                    style={{ position: 'absolute', top: '10px', right: '10px' }}>
+                    Close ✕
+                  </button>
+              </div>
+
+              {history.length === 0 ? (
+                <p className="text-sm text-gray-500 text-center">No transactions yet.</p>
+                                      ) : (
+                <ul className="space-y-3">
+                {history.map((tx, index) => (
+                <li
+                  key={index}
+                  className="bg-gray-50 border border-gray-200 rounded-lg p-3 shadow-sm"
+                    >
+                    <p className="text-blue-800 font-semibold text-md">
+                    +{tx.points.toLocaleString()} pts
+                    </p>
+                    <p className="text-xs text-gray-500">🧾 {tx.receiptNumber}</p>
+                    <p className="text-xs text-gray-500">{tx.date}</p>
+                </li>
+                  ))}
+                </ul>
+              )}
+            </div>
+          </div>
+          )}
         </div>
       </main>
     </>
@@ -109,7 +179,12 @@ export default function Dashboard() {
 }
 
 // === QR SCANNER COMPONENT ===
-function QrScannerComponent() {
+type QrScannerProps = {
+  userPhone: string;
+  onScan: (points: number, date: string, receiptNumber: string) => void;
+};
+
+function QrScannerComponent({ userPhone, onScan }: QrScannerProps) {
   const [showScanner, setShowScanner] = useState(false);
   const [scannedResult, setScannedResult] = useState<string | null>(null);
   const scannerRef = useRef<HTMLDivElement>(null);
@@ -120,7 +195,27 @@ function QrScannerComponent() {
       const config = { fps: 10, qrbox: 250 };
 
       const qrCodeSuccessCallback = (decodedText: string) => {
-        setScannedResult(decodedText);
+        try {
+          const qrData = JSON.parse(decodedText);
+          const { phone, points, receiptNumber } = qrData;
+
+          if (!phone || !points || !receiptNumber) {
+            setScannedResult('❌ Missing QR code fields.');
+            return;
+          }
+
+          if (phone !== userPhone) {
+            setScannedResult('❌ Phone mismatch. This QR code is not for you.');
+            return;
+          }
+
+          const date = new Date().toLocaleString();
+          onScan(points, date, receiptNumber);
+          setScannedResult(`✅ Points updated to ${points.toLocaleString()}`);
+        } catch {
+          setScannedResult('❌ Invalid QR code.');
+        }
+
         html5QrCodeRef.current?.stop().then(() => {
           html5QrCodeRef.current?.clear();
         });
@@ -134,7 +229,7 @@ function QrScannerComponent() {
           config,
           qrCodeSuccessCallback,
           (errorMessage: string) => {
-            console.warn('QR Code scan error:', errorMessage);
+            console.error('QR Code scan error:', errorMessage);
           }
         )
         .catch((err) => {
@@ -143,13 +238,11 @@ function QrScannerComponent() {
     }
 
     return () => {
-      if (html5QrCodeRef.current) {
-        html5QrCodeRef.current.stop().then(() => {
-          html5QrCodeRef.current?.clear();
-        });
-      }
+      html5QrCodeRef.current?.stop().then(() => {
+        html5QrCodeRef.current?.clear();
+      });
     };
-  }, [showScanner]);
+  }, [showScanner, userPhone, onScan]);
 
   return (
     <div>
@@ -171,7 +264,7 @@ function QrScannerComponent() {
 
       {scannedResult && (
         <div className="bg-green-100 text-green-800 p-3 rounded-lg mt-4 text-center">
-          ✅ Scanned: {scannedResult}
+          {scannedResult}
         </div>
       )}
     </div>
