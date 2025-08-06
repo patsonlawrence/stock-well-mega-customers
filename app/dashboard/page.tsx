@@ -31,7 +31,7 @@ export default function Dashboard() {
     }
 
     const userData = JSON.parse(storedUser);
-    const initialPoints = 12000;
+    const initialPoints = 0;
     setUser({
       name: userData.fullName,
       phone: userData.phone,
@@ -55,7 +55,7 @@ export default function Dashboard() {
     setPoints(newPoints); // ✅ Replace total points (not add)
 
     const newTx: Transaction = { points: newPoints, date, receiptNumber };
-    const updatedHistory = [newTx, ...history].slice(0, 5);
+    const updatedHistory = [newTx, ...history].slice(0, 20); // Keep only the last 20 transactions
     setHistory(updatedHistory);
     localStorage.setItem('transactionHistory', JSON.stringify(updatedHistory));
   };
@@ -142,7 +142,7 @@ export default function Dashboard() {
           <div className="fixed inset-0 bg-black bg-opacity-40 flex items-end justify-center z-50">
             <div className="w-full max-w-md bg-white rounded-t-xl p-4 max-h-[80vh] overflow-y-auto">
               <div className="flex justify-between items-center mb-4">
-                  <h3 className="text-lg font-semibold">🧾 Last 5 Transactions</h3>
+                  <h3 className="text-lg font-semibold">🧾 Last 20 Transactions</h3>
                   <button
                     onClick={() => setShowHistory(false)}
                     className="text-red-600 font-semibold text-sm"
