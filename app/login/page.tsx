@@ -67,6 +67,14 @@ export default function Login() {
       </Head>
       <div className="flex items-center justify-center min-h-screen bg-gray-100 px-4">
         <div className="w-full max-w-md p-8 bg-white rounded-lg shadow-md">
+          <img
+          src="/logos/stalogo.PNG"
+          alt="Standard Logo"
+          width={100}
+          height={100}
+          className="mb-4"
+          style={{ display: 'block', margin: '0 auto', textAlign: 'center' }}
+        />
           <h2 className="text-2xl font-bold text-center mb-6">Login</h2>
           <form className="space-y-5" onSubmit={handleLogin}>
             <div>
@@ -119,7 +127,29 @@ export default function Login() {
           </form>
           <p className="text-center text-sm text-gray-600 mt-4">
             Don't have an account? <a href="/signup" className="text-blue-500">Sign up</a>
+            <button
+      onClick={() => router.push('/')}
+        style={{
+          position: 'fixed',
+          bottom: '20px',
+          left: '30%',
+          transform: 'translateX(-50%)',
+          backgroundColor: 'gray',
+          color: '#ffffff',
+          padding: '0.75rem 1.5rem',
+          border: 'none',
+          borderRadius: '1.75rem',
+          cursor: 'pointer',
+          fontWeight: 500,
+          fontSize: '1rem',
+          width: '25%',
+          zIndex: 1000,
+        }}
+      >
+        Back
+      </button> 
           </p>
+          
         </div>
       </div>
     </>

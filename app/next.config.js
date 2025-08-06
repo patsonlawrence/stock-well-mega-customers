@@ -3,11 +3,14 @@ const withPWA = require('next-pwa')({
   register: true,
   skipWaiting: true,
   disable: process.env.NODE_ENV === 'development',
-
-  // 🔽 Enable custom caching behavior
   runtimeCaching: require('next-pwa/cache'),
 });
- 
-module.exports = withPWA({
+
+const nextConfig = {
   reactStrictMode: true,
-});
+
+  // ✅ Add this to avoid cross-origin dev warning
+  allowedDevOrigins: ['http://192.168.100.20'],
+};
+
+module.exports = withPWA(nextConfig);

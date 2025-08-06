@@ -51,10 +51,10 @@ export default function Dashboard() {
           style={{ display: 'block', margin: '0 auto', textAlign: 'center' }}
         />
           <div>
-            <h2 className="text-xl font-bold mb-1">Welcome 👋</h2>
+            <h2 className="text-xl font-bold mb-1">Welcome 👋 </h2>            
             <h2 className="text-xl font-bold mb-1">{user.name} </h2>
             <p className="text-gray-600 mb-4">Phone: {user.phone}</p>
-
+            
             <div className="relative bg-blue-100 p-4 rounded-lg flex items-center justify-between">
               <div>
                 <h3 className="text-sm text-blue-700 font-semibold">Points Balance</h3>
@@ -93,7 +93,7 @@ export default function Dashboard() {
               onClick={() => {
                 localStorage.removeItem('loggedInUser');
                 localStorage.removeItem('loggedIn');
-                window.location.href = '/login';
+                window.location.href = '/';
               }}
               className="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700"
             >
