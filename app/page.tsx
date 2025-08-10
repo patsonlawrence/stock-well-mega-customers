@@ -45,27 +45,32 @@ function MobileLayout() {
         <CustomerCarousel/> 
               
       </main>
-      <button
-      onClick={() => router.push('/login')}
-        style={{
-          position: 'fixed',
-          bottom: '20px',
-          left: '50%',
-          transform: 'translateX(-50%)',
-          backgroundColor: '#097520ff',
-          color: '#ffffff',
-          padding: '0.75rem 1.5rem',
-          border: 'none',
-          borderRadius: '1.75rem',
-          cursor: 'pointer',
-          fontWeight: 500,
-          fontSize: '1rem',
-          width: '75%',
-          zIndex: 1000,
-        }}
-      >
-        Log In
-      </button>      
+      <a
+  onClick={() => {
+    window.location.href = 'intent://#Intent;package=com.komusoft.pos;end';
+  }}
+  style={{
+    position: 'fixed',
+    bottom: '20px',
+    left: '50%',
+    transform: 'translateX(-50%)',
+    backgroundColor: '#097520ff',
+    color: '#ffffff',
+    padding: '0.75rem 1.5rem',
+    border: 'none',
+    borderRadius: '1.75rem',
+    cursor: 'pointer',
+    fontWeight: 500,
+    fontSize: '1rem',
+    width: '75%',
+    zIndex: 1000,
+    textAlign: 'center',
+    textDecoration: 'none',
+    display: 'block',
+  }}
+>
+  Open POS App
+</a>  
       <a
   href="https://wa.me/256751559938?text=Hello%2C%20I%27m%20interested%20in%20your%20store%20products"
   target="_blank"
