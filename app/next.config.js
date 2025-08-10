@@ -1,5 +1,5 @@
 const withPWA = require('next-pwa')({
-  dest: 'public',
+  dest: 'out',
   register: true,
   skipWaiting: true,
   disable: process.env.NODE_ENV === 'development',
@@ -7,10 +7,8 @@ const withPWA = require('next-pwa')({
 });
 
 const nextConfig = {
+  output: 'export',  // static export mode
   reactStrictMode: true,
-
-  // ✅ Add this to avoid cross-origin dev warning
-  allowedDevOrigins: ['http://192.168.100.20'],
 };
 
 module.exports = withPWA(nextConfig);

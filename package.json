@@ -13,6 +13,7 @@
     "@capacitor/geolocation": "^7.1.4",
     "@capacitor/local-notifications": "^7.0.1",
     "@heroicons/react": "^2.2.0",
+    "cordova-plugin-app-launcher": "^0.4.0",
     "html5-qrcode": "^2.3.8",
     "next": "15.4.4",
     "next-pwa": "^5.6.0",
