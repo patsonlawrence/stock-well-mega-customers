@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useSwipeable } from 'react-swipeable';
 import { FaWhatsapp, FaBeer, FaCoffee, FaFacebook, FaTwitter, FaInstagram } from 'react-icons/fa';
-
+import { Geolocation } from '@capacitor/geolocation';
 export default function Home() {
   const [isMobile, setIsMobile] = useState(false);
 
@@ -38,11 +38,13 @@ function MobileLayout() {
             }}
     >
       <main>
-        <h1><img src="/logos/stalogo.PNG" alt="Standard Logo" width="100" height="100" />
-</h1>        
+        <h1>
+          <img src="/logos/stalogo.PNG" alt="Standard Logo" width="100" height="100" />
+        </h1>        
           {/* Your mobile-specific form or content */}
         
         <CustomerCarousel/> 
+        <CustomerCarousel1/>
               
       </main>
      <a
@@ -449,7 +451,8 @@ function MobileLayout() {
     }}
   >
     🕒 Visit our new Lweeza Branch open 24 hrs!     .
-        Enjoy Unlimited Shopping, Dining, and Stock Variety! 🕒
+        Enjoy Unlimited Shopping, Dining, and Stock Variety! 🕒 
+        Black November Deals! Up to 95% Off on Selected Items! Aponye Branch 2nd Floor 🕒
   </div>
 
   {/* CSS Keyframes inside <style> tag */}
@@ -609,6 +612,122 @@ const swipeHandlers = useSwipeable(swipeOptions);
     </div>
   );
 }
+function CustomerCarousel1() {
+  const images = [
+    
+    '/promos2/1.PNG','/promos2/2.PNG',
+    '/promos2/3.PNG','/promos2/4.PNG',
+    '/promos2/5.PNG','/promos2/6.PNG',
+    '/promos2/7.PNG','/promos2/8.PNG',
+    '/promos2/9.PNG','/promos2/10.PNG',
+  ];
+
+  const [index, setIndex] = useState(0);
+  const prevIndex = (index - 1 + images.length) % images.length;
+  const nextIndex = (index + 1) % images.length;
+
+  const goToPrev = () => setIndex(prevIndex);
+  const goToNext = () => setIndex(nextIndex);
+  const [isPaused, setIsPaused] = useState(false);
+
+  // Auto-slide every 4 seconds
+  useEffect(() => {
+  if (isPaused) return;
+
+  const interval = setInterval(() => {
+    setIndex((prev) => (prev + 1) % images.length);
+  }, 4000);
+
+  return () => clearInterval(interval);
+}, [isPaused, images.length]);
+
+  const [swipeOptions, setSwipeOptions] = useState<any>({
+  onSwipedLeft: goToNext,
+  onSwipedRight: goToPrev,
+  trackMouse: true,
+});
+
+useEffect(() => {
+  const isTouch =
+    typeof window !== 'undefined' &&
+    ('ontouchstart' in window || (navigator && navigator.maxTouchPoints > 0));
+
+  if (isTouch) {
+    setSwipeOptions((prev: any) => ({
+      ...prev,
+      preventDefaultTouchmoveEvent: true,
+    }));
+  }
+}, []);
+
+const swipeHandlers = useSwipeable(swipeOptions);
+
+  return (
+    <div
+      {...swipeHandlers}
+      style={{
+        position: 'relative',
+        width: '90%',
+        maxWidth: '800px',
+        height: '20px',
+        margin: '40px auto',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        touchAction: 'pan-y',
+      }}
+    >
+      {/* Previous Image */}
+      <img
+        src={images[prevIndex]}
+        alt="Previous"
+        onClick={goToPrev}
+        style={{
+          position: 'relative',
+          left: '5%',
+          width: '90px',
+          opacity: 0.5,
+          cursor: 'pointer',
+          zIndex: 1,
+          transform: 'translateY(-50px)',
+          boxShadow: '0 6px 20px rgba(0,0,0,0.5)',
+        }}
+      />
+
+      {/* Current Image */}
+      <img
+        src={images[index]}
+        alt="Current"
+        onClick={goToNext}
+        style={{
+          zIndex: 3,
+          width: '200px',
+        //  borderRadius: '20px',
+          boxShadow: '0 6px 20px rgba(0,0,0,0.3)',
+          cursor: 'pointer',
+          transform: 'translateY(-50px)',
+        }}
+      />
+
+      {/* Next Image */}
+      <img
+        src={images[nextIndex]}
+        alt="Next"
+        onClick={goToNext}
+        style={{
+          position: 'relative',
+          right: '1%',
+          width: '75px',
+          opacity: 0.5,
+          transform: 'translateY(-50px)',
+          cursor: 'pointer',
+          zIndex: 1,
+          boxShadow: '0 6px 20px rgba(0,0,0,0.5)',
+        }}
+      />
+    </div>
+  );
+}
 function DesktopLayout() {
   const router = useRouter();
   return (
@@ -651,40 +770,53 @@ function DesktopLayout() {
     </div>
   );
 }
+/*
 import { LocalNotifications } from '@capacitor/local-notifications';
 
-LocalNotifications.schedule({
-  notifications: [
-    {
-      title: "On sale",
-      body: "Widgets are 10% off. Act fast!",
-      id: 1,
-      schedule: { at: new Date(Date.now() + 1000 * 5) },
-      sound: undefined,
-      attachments: undefined,
-      actionTypeId: "",
-      extra: null
-    }
-  ]
-});
-import { Geolocation } from '@capacitor/geolocation';
-// Request geolocation and log position
-(async () => {
-  try {
-    const position = await Geolocation.getCurrentPosition();
-    const latitude = position.coords.latitude;
-    const longitude = position.coords.longitude;
-    console.log('Lat:', latitude, 'Lng:', longitude);
-  } catch (error) {
-    if (!navigator.geolocation) {
-  console.error('Geolocation is not supported by this browser.');
-} else {
-  navigator.geolocation.getCurrentPosition(
-    pos => console.log('Navigator position:', pos),
-    err => console.error('Navigator error:', err)
-  );
-}
+async function setupNotification() {
+  const permission = await LocalNotifications.requestPermissions();
+
+  if (permission.display === 'granted') {
+    await LocalNotifications.schedule({
+      notifications: [
+        {
+          title: "On sale",
+          body: "Widgets are 10% off. Act fast!",
+          id: 1,
+          schedule: { at: new Date(Date.now() + 1000 * 5) }, // 5 seconds later
+        }
+      ]
+    });
+  } else {
+    console.error('Notification permission not granted');
   }
-})();
+}
+
+setupNotification();
+*/
+function MyComponent() {
+  useEffect(() => {
+    const getLocation = async () => {
+      try {
+        const position = await Geolocation.getCurrentPosition();
+        const { latitude, longitude } = position.coords;
+        console.log('Lat:', latitude, 'Lng:', longitude);
+      } catch (error) {
+        if (typeof navigator !== 'undefined' && navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(
+            (pos) => console.log('Navigator position:', pos),
+            (err) => console.error('Navigator error:', err)
+          );
+        } else {
+          console.error('Geolocation is not supported by this browser.');
+        }
+      }
+    };
+
+    getLocation(); // call the async function inside useEffect
+  }, []);
+
+  return <div>Getting location...</div>;
+}
 
 
