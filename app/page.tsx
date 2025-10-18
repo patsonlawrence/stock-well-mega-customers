@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
+import Image from 'next/image';
 import { useSwipeable } from 'react-swipeable';
 import { FaWhatsapp, FaBeer, FaCoffee, FaFacebook, FaTwitter, FaInstagram } from 'react-icons/fa';
 import { Geolocation } from '@capacitor/geolocation';
@@ -39,7 +40,7 @@ function MobileLayout() {
     >
       <main>
         <h1>
-          <img src="/logos/stalogo.PNG" alt="Standard Logo" width="100" height="100" />
+          <Image src="/logos/stalogo.PNG" alt="Standard Logo" width="100" height="100" />
         </h1>        
           {/* Your mobile-specific form or content */}
         
@@ -96,9 +97,11 @@ function MobileLayout() {
     textAlign: 'center',
   }}
 >
-  <img
+  <Image
     src="/logos/whatsapp.PNG"
     alt="WhatsApp Icon"
+    width={10}                // ✅ Required
+    height={10}              // ✅ Required
     style={{
       width: '15px',
       height: '15px',
@@ -135,9 +138,11 @@ function MobileLayout() {
     textAlign: 'center',
       }}
        >
-  <img
+  <Image
     src="/logos/whatsapp.PNG"
     alt="WhatsApp Icon"
+     width={15}                // ✅ Required
+    height={15}
     style={{
       width: '15px',
       height: '15px',
@@ -173,9 +178,11 @@ function MobileLayout() {
     textAlign: 'center',
       }}
         >
-  <img
+  <Image
     src="/logos/whatsapp.PNG"
     alt="WhatsApp Icon"
+     width={10}                // ✅ Required
+    height={10}
     style={{
       width: '15px',
       height: '15px',
@@ -211,12 +218,14 @@ function MobileLayout() {
     textAlign: 'center',
       }}
        >
-  <img
+  <Image
     src="/logos/whatsapp.PNG"
     alt="WhatsApp Icon"
+     width={15}                // ✅ Required
+    height={15}
     style={{
       width: '15px',
-      height: '15px',
+      height: 'auto',
       marginBottom: '1px',
       objectFit: 'contain',      // ✅ ensures proper fit
     }}
@@ -492,7 +501,7 @@ function MobileLayout() {
 
   return (
     <div style={{ textAlign: 'center', marginTop: '1rem' }}>
-      <img
+      <Image
         src={images[index]}
         alt={`Slide ${index + 1}`}
         style={{ maxWidth: '50%', height: 'auto', borderRadius: '10px', marginBottom: '0.5rem' }}
@@ -505,9 +514,12 @@ function CustomerCarousel() {
     '/promos/STANDARDLOGO.PNG',
     '/promos/contactus.PNG',
     '/promos/monti.PNG',
-    '/promos/1.PNG','/promos/2.PNG',
-    '/promos/3.PNG','/promos/4.PNG',
-    '/promos/5.PNG','/promos/6.PNG',
+    '/promos/1.PNG',
+    '/promos/2.PNG',
+    '/promos/3.PNG',
+    '/promos/4.PNG',
+    '/promos/5.PNG',
+    '/promos/6.PNG',
   ];
 
   const [index, setIndex] = useState(0);
@@ -516,35 +528,12 @@ function CustomerCarousel() {
 
   const goToPrev = () => setIndex(prevIndex);
   const goToNext = () => setIndex(nextIndex);
-  const [isPaused, setIsPaused] = useState(false);
 
-  // Auto-slide every 4 seconds
-  useEffect(() => {
-  if (isPaused) return;
-
-  const interval = setInterval(() => {
-    setIndex((prev) => (prev + 1) % images.length);
-  }, 4000);
-
-  return () => clearInterval(interval);
-}, [isPaused, images.length]);
-
-  const isTouchDevice = () => {
-  if (typeof window !== 'undefined' && typeof navigator !== 'undefined') {
-    return 'ontouchstart' in window || navigator.maxTouchPoints > 0;
-  }
-  return false;
-};
-  const swipeOptions: any = {
-  onSwipedLeft: goToNext,
-  onSwipedRight: goToPrev,
-  trackMouse: true,
-};
-
-if (isTouchDevice()) {
-  swipeOptions.preventDefaultTouchmoveEvent = true;
-}
-const swipeHandlers = useSwipeable(swipeOptions);
+  const swipeHandlers = useSwipeable({
+    onSwipedLeft: goToNext,
+    onSwipedRight: goToPrev,
+    trackMouse: true,
+  });
 
   return (
     <div
@@ -554,59 +543,53 @@ const swipeHandlers = useSwipeable(swipeOptions);
         width: '90%',
         maxWidth: '800px',
         height: '300px',
-        margin: '40px auto',
+        margin: '25px auto',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        touchAction: 'pan-y',
       }}
     >
       {/* Previous Image */}
-      <img
+      <Image
         src={images[prevIndex]}
         alt="Previous"
+        width={90}                // ✅ Required
+        height={120}              // ✅ Required (adjust as needed)
         onClick={goToPrev}
         style={{
-          position: 'relative',
-          left: '5%',
-          width: '90px',
           opacity: 0.5,
           cursor: 'pointer',
-          zIndex: 1,
-          transform: 'translateY(-50px)',
-          boxShadow: '0 6px 20px rgba(0,0,0,0.5)',
+          marginRight: '10px',
+          borderRadius: '8px',
         }}
       />
 
       {/* Current Image */}
-      <img
+      <Image
         src={images[index]}
         alt="Current"
+        width={200}               // ✅ Required
+        height={250}              // ✅ Required (adjust as needed)
         onClick={goToNext}
         style={{
-          zIndex: 2,
-          width: '200px',
-          borderRadius: '20px',
+          borderRadius: '12px',
           boxShadow: '0 6px 20px rgba(0,0,0,0.3)',
           cursor: 'pointer',
-          transform: 'translateY(-50px)',
         }}
       />
 
       {/* Next Image */}
-      <img
+      <Image
         src={images[nextIndex]}
         alt="Next"
+        width={50}                // ✅ Required
+        height={120}              // ✅ Required
         onClick={goToNext}
         style={{
-          position: 'relative',
-          right: '1%',
-          width: '75px',
           opacity: 0.5,
-          transform: 'translateY(-50px)',
           cursor: 'pointer',
-          zIndex: 1,
-          boxShadow: '0 6px 20px rgba(0,0,0,0.5)',
+          marginLeft: '10px',
+          borderRadius: '8px',
         }}
       />
     </div>
@@ -670,7 +653,7 @@ const swipeHandlers = useSwipeable(swipeOptions);
         width: '90%',
         maxWidth: '800px',
         height: '20px',
-        margin: '40px auto',
+        margin: '45px auto',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
@@ -678,14 +661,16 @@ const swipeHandlers = useSwipeable(swipeOptions);
       }}
     >
       {/* Previous Image */}
-      <img
+      <Image
         src={images[prevIndex]}
         alt="Previous"
+        width={90}                // ✅ Required
+        height={220} 
         onClick={goToPrev}
         style={{
           position: 'relative',
-          left: '5%',
-          width: '90px',
+          left: '0%',
+          width: '0px',
           opacity: 0.5,
           cursor: 'pointer',
           zIndex: 1,
@@ -695,29 +680,43 @@ const swipeHandlers = useSwipeable(swipeOptions);
       />
 
       {/* Current Image */}
-      <img
-        src={images[index]}
-        alt="Current"
-        onClick={goToNext}
-        style={{
-          zIndex: 3,
-          width: '200px',
-        //  borderRadius: '20px',
-          boxShadow: '0 6px 20px rgba(0,0,0,0.3)',
-          cursor: 'pointer',
-          transform: 'translateY(-50px)',
-        }}
-      />
+      <div
+  style={{
+    position: 'relative',
+    width: '120%',         // Full width of container (can change to 100vw for full screen)
+    maxWidth: '990px',     // Optional: restrict to a max width
+    height: '120px',       // Fixed height
+    margin: '0%',      // Center horizontally
+    overflow: 'hidden',
+    borderRadius: '12px',  // Optional: rounded corners
+  }}
+>
+  <Image
+    src={images[index]}
+    alt="Current"
+    fill                  // Uses absolute positioning
+    onClick={goToNext}
+    style={{
+      objectFit: 'cover', // 🔥 KEY: zoom-in for small images, zoom-out for large ones
+      objectPosition: 'center', // Optional: center the focus
+      cursor: 'pointer',
+    }}
+    sizes="100vw"          // Helps Next.js optimize image size for responsive
+    priority               // Optional: for faster loading
+  />
+</div>
 
       {/* Next Image */}
-      <img
+      <Image
         src={images[nextIndex]}
         alt="Next"
+        width={75}                // ✅ Required
+        height={100}              // ✅ Required
         onClick={goToNext}
         style={{
           position: 'relative',
           right: '1%',
-          width: '75px',
+          width: '0px',
           opacity: 0.5,
           transform: 'translateY(-50px)',
           cursor: 'pointer',
