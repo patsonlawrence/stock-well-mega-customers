@@ -509,6 +509,8 @@ function MobileLayout() {
     </div>
   );
 }*/
+
+
 function CustomerCarousel() {
   const images = [
     '/promos/STANDARDLOGO.PNG',
@@ -523,11 +525,21 @@ function CustomerCarousel() {
   ];
 
   const [index, setIndex] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
   const prevIndex = (index - 1 + images.length) % images.length;
   const nextIndex = (index + 1) % images.length;
 
   const goToPrev = () => setIndex(prevIndex);
   const goToNext = () => setIndex(nextIndex);
+
+  // Auto-slide every 2 seconds
+  useEffect(() => {
+    if (isPaused) return;
+    const interval = setInterval(() => {
+      setIndex((prev) => (prev + 1) % images.length);
+    }, 2000);
+    return () => clearInterval(interval);
+  }, [isPaused, images.length]);
 
   const swipeHandlers = useSwipeable({
     onSwipedLeft: goToNext,
@@ -538,63 +550,79 @@ function CustomerCarousel() {
   return (
     <div
       {...swipeHandlers}
+      onMouseEnter={() => setIsPaused(true)}
+      onMouseLeave={() => setIsPaused(false)}
       style={{
         position: 'relative',
-        width: '90%',
-        maxWidth: '800px',
-        height: '300px',
-        margin: '25px auto',
+        width: '100%',
+        maxWidth: '900px',
+        height: '260px',
+        margin: '30px auto',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
+        gap: '10px',
       }}
     >
       {/* Previous Image */}
       <Image
         src={images[prevIndex]}
         alt="Previous"
-        width={90}                // ✅ Required
-        height={120}              // ✅ Required (adjust as needed)
+        width={100}
+        height={120}
         onClick={goToPrev}
         style={{
           opacity: 0.5,
           cursor: 'pointer',
-          marginRight: '10px',
           borderRadius: '8px',
+          objectFit: 'cover',
         }}
       />
 
       {/* Current Image */}
-      <Image
-        src={images[index]}
-        alt="Current"
-        width={200}               // ✅ Required
-        height={250}              // ✅ Required (adjust as needed)
-        onClick={goToNext}
+      <div
         style={{
+          position: 'relative',
+          width: '250%',          
+          flex: 2,
+          height: '90%',
+          overflow: 'hidden',
           borderRadius: '12px',
-          boxShadow: '0 6px 20px rgba(0,0,0,0.3)',
-          cursor: 'pointer',
         }}
-      />
+      >
+        <Image
+          src={images[index]}
+          alt="Current"
+          fill
+          onClick={goToNext}
+          style={{
+            objectFit: 'cover',
+            objectPosition: 'center',
+            cursor: 'pointer',
+          }}
+          sizes="100vw"
+          priority
+        />
+      </div>
 
       {/* Next Image */}
       <Image
         src={images[nextIndex]}
         alt="Next"
-        width={50}                // ✅ Required
-        height={120}              // ✅ Required
+        width={100}
+        height={120}
         onClick={goToNext}
         style={{
           opacity: 0.5,
           cursor: 'pointer',
-          marginLeft: '10px',
           borderRadius: '8px',
+          objectFit: 'cover',
         }}
       />
     </div>
   );
 }
+
 function CustomerCarousel1() {
   const images = [
     
@@ -613,13 +641,13 @@ function CustomerCarousel1() {
   const goToNext = () => setIndex(nextIndex);
   const [isPaused, setIsPaused] = useState(false);
 
-  // Auto-slide every 4 seconds
+  // Auto-slide every 9 seconds
   useEffect(() => {
   if (isPaused) return;
 
   const interval = setInterval(() => {
     setIndex((prev) => (prev + 1) % images.length);
-  }, 4000);
+  }, 9000);
 
   return () => clearInterval(interval);
 }, [isPaused, images.length]);
@@ -682,10 +710,12 @@ const swipeHandlers = useSwipeable(swipeOptions);
       {/* Current Image */}
       <div
   style={{
-    position: 'relative',
-    width: '120%',         // Full width of container (can change to 100vw for full screen)
+    position: 'fixed',
+    width: '99%',         // Full width of container (can change to 100vw for full screen)
     maxWidth: '990px',     // Optional: restrict to a max width
     height: '120px',       // Fixed height
+    bottom: '250px',
+    //left: '88%',
     margin: '0%',      // Center horizontally
     overflow: 'hidden',
     borderRadius: '12px',  // Optional: rounded corners
