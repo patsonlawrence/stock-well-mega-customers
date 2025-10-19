@@ -565,15 +565,17 @@ function CustomerCarousel() {
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
       style={{
-        position: 'relative',
-        width: '100%',
+        position: 'fixed',
+        width: '98%',
         maxWidth: '900px',
-        height: '260px',
-        margin: '30px auto',
+        height: '210px',
+        margin: '1px',
+        backgroundColor: 'gray',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        gap: '10px',
+        gap: '20px',
+        touchAction: 'pan-y',
       }}
     >
       <Image
@@ -583,17 +585,15 @@ function CustomerCarousel() {
   height={120}
   onClick={goToPrev}
   style={{
-    width: '100px',       // ✅ Explicitly set width
-    height: '120px',      // ✅ Explicitly set height
+    width: '50px',       // ✅ Explicitly set width
+    height: '200px auto',      // ✅ Explicitly set height
     opacity: 0.5,
     cursor: 'pointer',
     borderRadius: '8px',
     objectFit: 'cover',   // ✅ Still crop nicely
+    
   }}
 />
-
-
-
       {/* Current Image */}
       <div
         style={{
@@ -626,8 +626,8 @@ function CustomerCarousel() {
   height={120}
   onClick={goToNext}
   style={{
-    width: '100px',
-    height: '120px',
+    width: '50px',
+    height: '120px auto',
     opacity: 0.5,
     cursor: 'pointer',
     borderRadius: '8px',
