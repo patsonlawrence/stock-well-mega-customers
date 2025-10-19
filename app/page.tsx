@@ -38,16 +38,27 @@ function MobileLayout() {
         backgroundColor: 'white',
             }}
     >
-      <main>
-        <h1>
-          <Image src="/logos/stalogo.PNG" alt="Standard Logo" width="100" height="100" />
-        </h1>        
-          {/* Your mobile-specific form or content */}
-        
-        <CustomerCarousel/> 
-        <CustomerCarousel1/>
-              
-      </main>
+      <main style={{ textAlign: 'center', padding: '20px' }}>
+  <div style={{ marginBottom: '20px' }}>
+    <Image
+      src="/logos/stalogo.PNG"
+      alt="Standard Logo"
+      width={100}
+      height={100}
+      style={{
+        width: '100px',     // ✅ Explicit width
+        height: '100px',    // ✅ Explicit height
+        objectFit: 'contain',
+      }}
+      priority
+    />
+  </div>
+
+  {/* Carousel sections */}
+  <CustomerCarousel />
+  <CustomerCarousel1 />
+</main>
+
      <a
  onClick={() => router.push('/login')}  
   style={{
@@ -511,6 +522,7 @@ function MobileLayout() {
 }*/
 
 
+
 function CustomerCarousel() {
   const images = [
     '/promos/STANDARDLOGO.PNG',
@@ -564,33 +576,35 @@ function CustomerCarousel() {
         gap: '10px',
       }}
     >
-      {/* Previous Image */}
       <Image
-        src={images[prevIndex]}
-        alt="Previous"
-        width={100}
-        height={120}
-        onClick={goToPrev}
-        style={{
-          opacity: 0.5,
-          cursor: 'pointer',
-          borderRadius: '8px',
-          objectFit: 'cover',
-        }}
-      />
+  src={images[prevIndex]}
+  alt="Previous"
+  width={100}
+  height={120}
+  onClick={goToPrev}
+  style={{
+    width: '100px',       // ✅ Explicitly set width
+    height: '120px',      // ✅ Explicitly set height
+    opacity: 0.5,
+    cursor: 'pointer',
+    borderRadius: '8px',
+    objectFit: 'cover',   // ✅ Still crop nicely
+  }}
+/>
+
+
 
       {/* Current Image */}
       <div
         style={{
           position: 'relative',
-          width: '250%',          
           flex: 2,
           height: '90%',
           overflow: 'hidden',
           borderRadius: '12px',
-        }}
-      >
-        <Image
+              }}
+                >
+          <Image
           src={images[index]}
           alt="Current"
           fill
@@ -599,29 +613,33 @@ function CustomerCarousel() {
             objectFit: 'cover',
             objectPosition: 'center',
             cursor: 'pointer',
-          }}
-          sizes="100vw"
+                }}
+          sizes="(max-width: 900px) 100vw, 600px"
           priority
-        />
+            />
       </div>
 
-      {/* Next Image */}
-      <Image
-        src={images[nextIndex]}
-        alt="Next"
-        width={100}
-        height={120}
-        onClick={goToNext}
-        style={{
-          opacity: 0.5,
-          cursor: 'pointer',
-          borderRadius: '8px',
-          objectFit: 'cover',
-        }}
-      />
+     <Image
+  src={images[nextIndex]}
+  alt="Next"
+  width={100}
+  height={120}
+  onClick={goToNext}
+  style={{
+    width: '100px',
+    height: '120px',
+    opacity: 0.5,
+    cursor: 'pointer',
+    borderRadius: '8px',
+    objectFit: 'cover',
+  }}
+/>
     </div>
   );
 }
+
+//export default CustomerCarousel;
+
 
 function CustomerCarousel1() {
   const images = [
